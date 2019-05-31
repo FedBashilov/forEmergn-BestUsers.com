@@ -32,7 +32,8 @@ export class RegistrationComponent implements OnInit {
     };
     let serialData = JSON.stringify(data);
     this.dataBase.setItem(login, serialData);
-    this.router.navigate(["login"]);
+    sessionStorage.setItem(login, "");
+    this.router.navigate(["users"]);
   }
 
 }
