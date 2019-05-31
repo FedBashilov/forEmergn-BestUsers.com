@@ -1,6 +1,6 @@
 I spent:
   1 day learning the basics of an Angular and TypeScript,
-  About 30 clean hours solving the problem.
+  About 25 clean hours solving the problem.
 
 
 Put these files in the project folder, then run "ng install" in this folder.
