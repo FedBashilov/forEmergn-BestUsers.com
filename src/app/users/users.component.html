@@ -1,0 +1,40 @@
+<header>
+  <span id="siteName">BestUsers.com</span>
+  <span id="menubar">
+    <a id="edit" (click)="showEdit = !showEdit" title="Edit account"><span>&#9998;</span></a>
+    <span id="loggedInUser">{{session.key(0)}}</span>
+    <a id="logOut" (click)="onLogOut()">
+      <img src="/assets/img/logout.png" height="20px" hspace="10px" alt="Log out" title="Log out">
+    </a>
+  </span>
+</header>
+<main>
+  <app-edit-account *ngIf="showEdit==true"></app-edit-account>
+  <div id="filters">
+    <span class="section_name">Filters</span>
+    <p>
+      <label for="user_login">login:<br>
+        <input type="text" name="login" id="login_filter" maxlength="36" value="" (input)="onFilter()">
+      </label>
+    </p>
+    <p>
+      <label for="user_name">Name:<br>
+        <input type="text" name="name" id="name_filter" maxlength="36" value="" (input)="onFilter()">
+      </label>
+    </p>
+    <p>
+      <label for="user_email">Email:<br>
+        <input type="text" name="email" id="email_filter" maxlength="36" value="" (input)="onFilter()">
+      </label>
+    </p>
+  </div>
+  <div id="usersList">
+    <span class="section_name">Users found: {{users.length}}</span>
+    <div class="User" *ngFor="let user of users">
+      <span>Login: {{user.login}}<br></span>
+      <span>Name: {{user.name}}<br></span>
+      <span>Email: {{user.email}}<br></span>
+      <span *ngIf="user.login==session.key(0)">Password: {{user.password}}</span>
+    </div>
+  </div>
+</main>

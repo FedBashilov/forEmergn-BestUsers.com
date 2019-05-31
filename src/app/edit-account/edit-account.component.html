@@ -1,0 +1,58 @@
+<div id="formWindow">
+  <form>
+    <span class="section_name">Edit account</span>
+    <p>
+      <label for="user_login">Login:<br>
+        <input type="text" name="login" id="login" value="" maxlength="36"
+        [ngModel]="login.value" #login>
+        <div class="alert" *ngIf="session.key(0)!=login.value && dataBase.getItem(login.value)">
+          &#9888;Login already registered</div>
+      </label>
+    </p>
+    <p>
+      <label for="user_name">Name:<br>
+        <input type="text" name="name" id="name" value="" maxlength="36"
+        [ngModel]="name.value"  #name>
+      </label>
+    </p>
+    <p>
+      <label for="user_email">Email:<br>
+        <input type="text" name="email" id="email" value="" maxlength="36"
+        [ngModel]="email.value"  #email>
+      </label>
+    </p>
+    <p>
+      <label for="user_password1">Password:<br>
+        <input type="password" name="password1" id="password1" value="" maxlength="36"
+        [ngModel]="password1.value"  #password1>
+        <div class="alert" *ngIf="password1.value.length < 8">
+          &#9888; Too short (min length is 8)</div>
+      </label>
+    </p>
+    <p>
+      <label for="user_password2">Repeat password:<br>
+        <input type="password" name="password2" id="password2" value="" maxlength="36"
+        [ngModel]="password2.value"  #password2>
+        <div class="alert" *ngIf="password2.value != password1.value">
+          &#9888; Passwords do not match</div>
+      </label>
+    </p>
+    <div>
+      <a id="delete" (click)="deleteRequest = true">
+        <img src="/assets/img/delete.png" height="20px" hspace="10px" alt="Log out" title="Log out">
+      </a>
+      <div *ngIf="deleteRequest == true">
+      &#9888; Delete your account?
+          <a id="deleteYes" (click)="onDeleteConfirm()">&#9989;</a>
+          <a id="deleteNo" (click)="deleteRequest = false">&#10060;</a>
+      </div>
+    </div>
+    <div class="alert" *ngIf="!login.value || session.key(0)!=login.value && dataBase.getItem(login.value) ||
+    !name.value || !email.value ||  password1.value.length < 8 || password1.value != password2.value;
+    else allCorrect">
+    &#9888; Fill in all fields correctly </div>
+    <ng-template #allCorrect>
+        <button type="button" (click)="onSaveChanges()">Save changes</button>
+    </ng-template>
+  </form>
+</div>

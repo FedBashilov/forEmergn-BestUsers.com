@@ -1,0 +1,23 @@
+<div id="formWindow">
+  <form>
+    <span class="section_name">Log In</span>
+    <p>
+      <label for="user_login">Login:<br>
+        <input type="text" name="login" id="login" value="" maxlength="36"
+        [ngModel]="login.value"  #login>
+        <div class="alert" *ngIf="!dataBase.getItem(login.value)">
+          &#9888;Login not registered</div>
+      </label>
+    </p>
+    <p>
+      <label for="user_password">Password:<br>
+        <input type="password" name="password" id="password" value="" maxlength="36"
+        [ngModel]="password.value"  #password>
+        <div class="alert" *ngIf="passwordError">
+          &#9888; Wrong password</div>
+      </label>
+    </p>
+    <button type="button" (click)="onLogin()" *ngIf="dataBase.getItem(login.value)">Log In</button>
+    <p>Don't have an account? <a routerLink="/registration">Register Here!</a></p>
+  </form>
+</div>
